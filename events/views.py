@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse
 from .models import Event
 from django.template import loader
@@ -28,10 +29,12 @@ def add_event(request):
 	event_to_add = Event()
 	event_title = request.POST['event_title']
 	event_to_add.title = event_title
-	event_to_add.start_time = '2017-12-25'
-	event_to_add.end_time = '2017-12-25'
+	event_to_add.start_time = request.POST['event_start']
+	event_to_add.end_time = request.POST['event_end']
+	event_privacy = request.POST.get('event.privacy', False)
+	print event_privacy
 	event_to_add.privacy = True
-	event_to_add.description = "Lit party. Everyone Roll THRUUUUU!!!"
-	event_to_add.location = "Lawry A3"
+	event_to_add.description = request.POST['event_description']
+	event_to_add.location = request.POST['event_location']
 	event_to_add.save()
-	return HttpResponse("<h1>Saved Event " + event_title + " to Database!</h1>")
+	return redirect('/events/')

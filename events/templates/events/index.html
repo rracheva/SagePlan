@@ -6,6 +6,11 @@
 
 <form action="/events/add_event/" method="post">
 	{% csrf_token %}
-	<input type="text" id="event_title" name="event_title" value=""/>
+	Event Title: <input type="text" id="event_title" name="event_title" value=""/><br>
+	Start Time: <input type="datetime-local" id="event_start" name="event_start" value=""/><br>
+	End Time: <input type="datetime-local" id="event_end" name="event_end" value=""/><br>
+	Privacy: <input type="checkbox" id="event_privacy" name="event_privacy" value="Private"/><br>
+	Description: <input type="text" id="event_description" name="event_description" value=""/><br>
+	Location: <input type="text" id="event_location" name="event_location" value=""/><br>
 	<input type="submit" id="add_event_button" name="add_event_button" value="Add Event"/>
 </form>
