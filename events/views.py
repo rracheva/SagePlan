@@ -38,3 +38,8 @@ def add_event(request):
 	event_to_add.location = request.POST['event_location']
 	event_to_add.save()
 	return redirect('/events/')
+
+def delete_event(request,event_id):
+    query = Event.objects.get(pk=event_id)
+    query.delete()
+    return redirect('/events/')
