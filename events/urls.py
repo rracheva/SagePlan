@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.conf.urls import url
 from django.contrib import admin
 from . import views
+from views import EventListView, EventSearchListView
 
 urlpatterns = [
 	# admin
@@ -18,6 +19,11 @@ urlpatterns = [
 	#Add Event
 	url(r'^add_event/$', views.add_event, name='add_event'),
 
-	url(r'^delete_event/(?P<event_id>[0-9]+)/$', views.delete_event, name='delete_event')
+	url(r'^delete_event/(?P<event_id>[0-9]+)/$', views.delete_event, name='delete_event'),
+
+	
+    #url(r'^$', EventListView.as_view(), name='event-list'),
+
+    url(r'^', EventSearchListView.as_view(), name='event-search-list'),
 
 ]

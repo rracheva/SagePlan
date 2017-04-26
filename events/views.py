@@ -5,6 +5,10 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from .models import Event
 from django.template import loader
+import operator
+
+from django.db.models import Q
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -43,3 +47,35 @@ def delete_event(request,event_id):
     query = Event.objects.get(pk=event_id)
     query.delete()
     return redirect('/events/')
+
+class EventListView(ListView):
+
+    model = Event
+
+    def get_context_data(self, **kwargs):
+        context = super(EventListView, self).get_context_data(**kwargs)
+       # context['now'] = timezone.now()
+        return context
+
+
+class EventSearchListView(EventListView):
+    """
+    Display a event list page filtered by the search query.
+    """
+    #paginate_by = 10
+
+    def get_queryset(self):
+        result = super(EventSearchListView, self).get_queryset()
+
+        query = self.request.GET.get('q')
+        if query:
+            query_list = query.split()
+            result = result.filter(
+                reduce(operator.or_,
+                       (Q(title__icontains=q) for q in query_list))
+            )
+
+        return result
+        #return render_to_response('search/search_results.html',
+                          # { 'query_string': query, 'found_entries': found_entries },
+                          # context_instance=RequestContext(request))

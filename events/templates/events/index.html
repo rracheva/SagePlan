@@ -15,3 +15,10 @@
 	Location: <input type="text" id="event_location" name="event_location" value=""/><br>
 	<input type="submit" id="add_event_button" name="add_event_button" value="Add Event"/>
 </form>
+
+<form id="searchform" action="{% url 'event-search-list' %}" method="get" accept-charset="utf-8">
+      <button class="searchbutton" type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+      <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+</form>
