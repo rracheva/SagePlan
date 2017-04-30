@@ -18,4 +18,17 @@ urlpatterns = [
 	#Add Event
 	url(r'^add_event/$', views.add_event, name='add_event'),
 
+	#Invite Form
+	url(r'^invite_view/$', views.invite_view, name='invite_view'),
+
+	#Invite Logic
+	url(r'^invite/$', views.invite, name='invite'),
+
+	#User Form
+	url(r'^signup/$', views.signup, name='signup'),
+
+	#Add User
+	url(r'^add_user/$', views.add_user, name='add_user'),
+
+
 ]

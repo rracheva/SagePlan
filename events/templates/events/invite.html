@@ -1,0 +1,13 @@
+<form action="/events/invite/" method="post">
+	{% csrf_token %}
+	Event: <select id="event_inv" name="event_inv" value=""/>
+				{% for event in my_events %}
+					<option value="{{event.event_id}}">{{event.title}}</li>
+				{% endfor %}
+			</select>
+
+	<br>
+	Person to be Invited: <input type="text" id="invitee" name="invitee" value=""/><br>
+	
+	<input type="submit" id="invite_button" name="invite_button" value="Invite"/>
+</form>
