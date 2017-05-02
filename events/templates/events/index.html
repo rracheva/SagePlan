@@ -1,17 +1,49 @@
-<ul>
-	{% for event in all_events %}
-		<li> <a href="/events/{{event.event_id}}/">{{event.title}}</a> <a href="/events/delete_event/{{event.event_id}}">DELETE</a></li>
 
-	{% endfor %}
-</ul>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>Create Event</h2>
+			<form action="/events/add_event/" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+				<label for="event_inv">Event Title:</label>
+				<input type="text" class="form-control" id="event_title" name="event_title" value=""/><br>
+				</div>
 
-<form action="/events/add_event/" method="post">
-	{% csrf_token %}
-	Event Title: <input type="text" id="event_title" name="event_title" value=""/><br>
-	Start Time: <input type="datetime-local" id="event_start" name="event_start" value=""/><br>
-	End Time: <input type="datetime-local" id="event_end" name="event_end" value=""/><br>
-	Privacy: <input type="checkbox" id="event_privacy" name="event_privacy" value="Private"/><br>
-	Description: <input type="text" id="event_description" name="event_description" value=""/><br>
-	Location: <input type="text" id="event_location" name="event_location" value=""/><br>
-	<input type="submit" id="add_event_button" name="add_event_button" value="Add Event"/>
-</form>
+
+				<div class="form-group">
+				<label for="event_inv">Start Time:</label>
+				<input type="datetime-local" class="form-control" id="event_start" name="event_start" value=""/><br>
+				</div>
+
+				<div class="form-group">
+				<label for="event_inv">End Time:</label>
+				<input type="datetime-local" class="form-control" id="event_end" name="event_end" value=""/><br>
+				</div>
+
+				<div class="form-group">
+				<label for="event_inv">Public:</label>
+				<input type="checkbox" id="event_privacy" name="event_privacy" value="Private"/><br>
+				</div>
+
+				<div class="form-group">
+				<label for="event_inv">Description:</label>
+				\<input type="text" class="form-control" id="event_description" name="event_description" value=""/><br>
+				</div>
+
+				<div class="form-group">
+				<label for="event_inv">Location:</label>
+				<input type="text" class="form-control" id="event_location" name="event_location" value=""/><br>
+				</div>
+
+
+				<input type="submit" class="btn btn-default" id="add_event_button" name="add_event_button" value="Add Event"/>
+			</form>
+	</div>
+<body>

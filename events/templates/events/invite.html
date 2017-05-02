@@ -1,0 +1,32 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>Invite</h2>
+			<form action="/events/invite/" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="event_inv">Event:</label>
+					<select id="event_inv" class="form-control" name="event_inv" value=""/>
+						{% for event in my_events %}
+							<option value="{{event.event_id}}">{{event.title}}</li>
+						{% endfor %}
+					</select>
+					</div>
+				<br>
+				<div class="form-group">
+					<label for="invitee">Invite:</label>
+					<input type="text" id="invitee" class="form-control" name="invitee" value="Username to Invite"/><br>
+			
+				<input type="submit" class="btn btn-default" id="invite_button" name="invite_button" value="Invite"/>
+			</form>
+	</div>
+<body>
+
+
+

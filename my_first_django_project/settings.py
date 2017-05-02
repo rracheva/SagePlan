@@ -46,6 +46,7 @@ ALLOWED_HOSTS = ['damp-citadel-60341.herokuapp.com']
 
 INSTALLED_APPS = [
     'events.apps.EventsConfig',
+    #'my_first_django_project.apps.MyFirstConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
