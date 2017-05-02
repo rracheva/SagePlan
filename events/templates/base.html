@@ -9,44 +9,33 @@
 </head>
 <body>
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/home">SagePlan</a>
-      </div>
-    <div>
-    <ul class="nav navbar-nav">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">SagePlan</a>
+    </div>
+    <ul class="nav nav-justified">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Page 1</a></li>
       <li><a href="#">Page 2</a></li>
+      <li><a href="#">Page 3</a></li>
       <li>
-        <form class="form-inline" action="/events/search/" method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            <input type="text" class="form-control" name="search" value=""></input>
-          </div>
-          <div class="form-group">
-            <input type="submit" class="btn btn-primary"></input>
-          </div>
+        <form action="/events/search/" method="post">
+          <input type="text" name="search" value="">
+          <a type="button" href="/events/search"></a>
         </form>
       </li>
-      </ul>
+      <li>
       {% if user.is_authenticated %}
-      <ul class="nav navbar-nav navbar-right">
-        <li><h4>Hi {{ user.username }}!</h4></li>
-        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-      </ul>
+        <p>Hi {{ user.username }}!</p>
+        <a href="{% url 'logout' %}">logout</a>
       {% else %}
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/events/signup"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-          <li><a href={% url 'login' %}><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-        </ul>
+        <a type="submit" class="btn btn-primary pull-right" href="{% url 'login' %}">Login</a>
       {% endif %}
       </li>
     </ul>
-    </div>
-    </div>
+    
+  </div>
   </nav>
-  
   <header>
     <div class="jumbotron text-center">
     <h1>SagePlan!</h1>
