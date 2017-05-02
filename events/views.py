@@ -52,7 +52,13 @@ def invite_view(request):
 	return HttpResponse(template.render(context, request))
 
 def detail(request, event_id):
-	return HttpResponse("<h1>Event Detail for event " + str(event_id) + "</h1>")
+	event = Event.objects.get(event_id=event_id)
+	print event.title
+	template = loader.get_template('events/event_detail.html')
+	context = {
+		'event' : event,
+	}
+	return HttpResponse(template.render(context, request))
 
 def add_event(request):
 	event_to_add = Event()
@@ -92,6 +98,29 @@ def invite(request):
 	invite_to_add.accepted = False
 	invite_to_add.save()
 	return redirect('/')
+
+def search(request):
+	search = request.POST.get('search')
+	print search
+	print "-----"
+	all_events = Event.objects.all()
+	hosted_events = Event.objects.filter(creator=request.user, title=search)
+	public_events = Event.objects.filter(privacy=False, title=search)
+	invited_to = Invite.objects.filter(invitee=request.user)
+	invited_to_ids = invited_to.values_list('event_id', flat=True)
+	invited_events = []
+	for event in all_events:
+		print event.title
+		if event.event_id in invited_to_ids and event.title==search:
+			invited_events.append(event)
+
+	template = loader.get_template('events/search_results.html')
+	context = {
+		'public_events' : public_events,
+		'hosted_events' : hosted_events,
+		'invited_events' : invited_events, 
+	}
+	return HttpResponse(template.render(context, request))
 
 
 

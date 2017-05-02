@@ -1,10 +1,41 @@
-<form action="/events/add_user/" method="post">
-	{% csrf_token %}
-	First Name: <input type="text" id="first_name" name="first_name" value=""/><br>
-	Last Name: <input type="text" id="last_name" name="last_name" value=""/><br>
-	Email: <input type="text" id="email" name="email" value=""/><br>
-	Username: <input type="text" id="username" name="username" value=""/><br>
-	Password: <input type="password" id="password" name="password" value=""/><br>
-	
-	<input type="submit" id="add_user_button" name="add_user_button" value="Sign Up"/>
-</form>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>Sign Up</h2>
+			<form action="/events/add_user/" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="first_name">First Name:</label>
+					<input type="text" class="form-control" id="first_name" name="first_name" value=""/><br>
+				</div>
+
+				<div class="form-group">
+					<label for="last_name">Last Name:</label>
+					<input type="text" class="form-control" id="last_name" name="last_name" value=""/><br>
+				</div>
+
+				<div class="form-group">
+					<label for="email">Email:</label>
+					<input type="text" class="form-control" id="email" name="email" value=""/><br>
+				</div>
+
+				<div class="form-group">
+					<label for="username">Username:</label>
+					<input type="text" class="form-control" id="username" name="username" value=""/><br>
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password:</label>
+					<input type="password" class="form-control" id="password" name="password" value=""/><br>
+				</div>
+				
+				<input type="submit" class="btn btn-default" id="add_user_button" name="add_user_button" value="Sign Up"/>
+			</form>
+	</div>
+<body>

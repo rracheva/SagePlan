@@ -19,6 +19,12 @@
       <li><a href="#">Page 2</a></li>
       <li><a href="#">Page 3</a></li>
       <li>
+        <form action="/events/search/" method="post">
+          <input type="text" name="search" value="">
+          <a type="button" href="/events/search"></a>
+        </form>
+      </li>
+      <li>
       {% if user.is_authenticated %}
         <p>Hi {{ user.username }}!</p>
         <a href="{% url 'logout' %}">logout</a>

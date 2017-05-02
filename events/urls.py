@@ -30,5 +30,7 @@ urlpatterns = [
 	#Add User
 	url(r'^add_user/$', views.add_user, name='add_user'),
 
+	#Search
+	url(r'^search/$', views.search, name='search'),
 
 ]
