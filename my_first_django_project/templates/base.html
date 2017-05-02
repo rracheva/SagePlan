@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+@media (max-width: 768px) {
+  .navbar-form {
+    margin: 0 !important;
+    padding-top: 15px !important;
+  }
+}
+</style>
+
   <meta charset="utf-8">
   <title>{% block title %}SagePlan Login{% endblock %}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,15 +20,15 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/home">SagePlan</a>
+        <a class="navbar-brand" href="#">SagePlan</a>
       </div>
     <div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
-      <li>
-        <form class="form-inline" action="/events/search/" method="post">
+      {% if user.is_authenticated %}
+      <li class="active"><a href="/home">Home</a></li>
+      <li><a href="/events">Create Event</a></li>
+      <li><a href="/events/invite_view">Invite</a></li>
+        <form class="navbar-form navbar-left" action="/events/search/" method="post">
           {% csrf_token %}
           <div class="form-group">
             <input type="text" class="form-control" name="search" value=""></input>
@@ -28,17 +37,17 @@
             <input type="submit" class="btn btn-primary"></input>
           </div>
         </form>
-      </li>
+        {% endif %}
       </ul>
       {% if user.is_authenticated %}
       <ul class="nav navbar-nav navbar-right">
         <li><h4>Hi {{ user.username }}!</h4></li>
-        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
       {% else %}
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/events/signup"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-          <li><a href={% url 'login' %}><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+          <li><a href="/events/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href={% url 'login' %}><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
       {% endif %}
       </li>
@@ -51,14 +60,36 @@
     <div class="jumbotron text-center">
     <h1>SagePlan!</h1>
     </div>
-    {% if user.is_authenticated %}
-      <p>Hi {{ user.username }}!</p>
-      <a href="{% url 'logout' %}">logout</a>
-    {% endif %}
   </header>
   <hr>
   <main>
-    <a type="button" class="btn btn-primary" href="/events">Add Event</a>
+    {% if user.is_authenticated %}
+      <!-- <a type="button" class="btn btn-primary" href="/events">Add Event</a>
+      <a type="button" class="btn btn-primary" href="/events/signup">Add User</a>
+      <a type="button" class="btn btn-primary" href="/events/invite_view">Invite</a> -->
+
+        <div class="container">
+          <h4>Hosted Events</h4>
+          <div class="well well-sm">
+            <ul>
+              {% for event in hosted_events %}
+                <li><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="container">
+          <h4>Invited Events</h4>
+          <div class="well well-sm">
+            <ul>
+              {% for event in invited_events %}
+                <li><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
     {% block content %}
       
     {% endblock %}

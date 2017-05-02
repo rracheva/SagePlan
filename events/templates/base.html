@@ -47,7 +47,12 @@
   </header>
   <hr>
   <main>
-    <a type="button" class="btn btn-primary" href="/events">Add Event</a>
+    {% if user.is_authenticated %}
+      <a type="button" class="btn btn-primary" href="/events">Add Event</a>
+      <a type="button" class="btn btn-primary" href="/events/signup">Add User</a>
+      <b type="button" class="btn btn-primary" href="/events/invite_view">Invite</b>
+    {% endif %}
+
     {% block content %}
       
     {% endblock %}
