@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'my_first_django_project.wsgi.application'
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES = { 'default':  {
-                'ENGINE': db_from_env
+                'ENGINE': 'db_from_env',
                }
 
             }
