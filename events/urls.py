@@ -30,5 +30,6 @@ urlpatterns = [
 	#Add User
 	url(r'^add_user/$', views.add_user, name='add_user'),
 
+	url(r'^delete_event/(?P<event_id>[0-9]+)/$', views.delete_event, name='delete_event')
 
 ]

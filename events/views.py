@@ -93,13 +93,7 @@ def invite(request):
 	invite_to_add.save()
 	return redirect('/')
 
-
-
-
-
-
-
-
-
-
-
+def delete_event(request,event_id):
+    query = Event.objects.get(pk=event_id)
+    query.delete()
+    return redirect('/events/')
