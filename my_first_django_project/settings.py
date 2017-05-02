@@ -39,7 +39,7 @@ SECRET_KEY = 'b(lq8qoklt@ni@2#3ff*hf8v6tfgu^ovr(vdt+rba@baohfgjn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['u'damp-citadel-60341.herokuapp.com'']
+ALLOWED_HOSTS = ['damp-citadel-60341.herokuapp.com']
 
 
 # Application definition
