@@ -18,9 +18,7 @@ urlpatterns = [
 	#Add Event
 	url(r'^add_event/$', views.add_event, name='add_event'),
 
-<<<<<<< HEAD
-	url(r'^delete_event/(?P<event_id>[0-9]+)/$', views.delete_event, name='delete_event')
-=======
+
 	#Invite Form
 	url(r'^invite_view/$', views.invite_view, name='invite_view'),
 
@@ -35,6 +33,5 @@ urlpatterns = [
 
 	#Search
 	url(r'^search/$', views.search, name='search'),
->>>>>>> 689d82eb196bea566beccaa22cd54ba3c875487e
 
 ]
