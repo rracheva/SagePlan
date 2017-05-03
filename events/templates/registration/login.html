@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{%if user.is_authenticated}
+{%if user.is_authenticated%}
+{% else %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
