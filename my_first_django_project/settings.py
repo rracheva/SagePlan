@@ -39,14 +39,15 @@ SECRET_KEY = 'b(lq8qoklt@ni@2#3ff*hf8v6tfgu^ovr(vdt+rba@baohfgjn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['damp-citadel-60341.herokuapp.com']
+ALLOWED_HOSTS = ['damp-citadel-60341.herokuapp.com',
+                    '127.0.0.1' ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'events.apps.EventsConfig',
-    #'my_first_django_project.apps.MyFirstConfig',
+    'my_first_django_project.apps.MyFirstConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -101,20 +102,28 @@ WSGI_APPLICATION = 'my_first_django_project.wsgi.application'
 #         'PORT': '',
 #     }
 # }
-# Update database configuration with $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES = { 'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'maddie',
-        'USER': 'maddie',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
 
-            }
-DATABASES['default'].update(db_from_env)
+# Update database configuration with $DATABASE_URL.
+# import dj_database_url
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES = { 'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'maddie',
+#         'USER': 'maddie',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+
+#             }
+# DATABASES['default'].update(db_from_env)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db',
+    }
+}
 
 
 

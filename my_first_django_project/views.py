@@ -10,12 +10,11 @@ from django.template import loader
 
 def home(request):
 	#return HttpResponse("<h1>Index Page</h1>")
-	all_events = Event.objects.all()
-	hosted_events = all_events.filter(creator=request.user)
+	hosted_events = Event.objects.filter(creator=request.user)
 	invited_to = Invite.objects.filter(invitee=request.user)
 	invited_to_ids = invited_to.values_list('event_id', flat=True)
 	invited_events = []
-	for event in all_events:
+	for event in Event.objects.all():
 		print event.event_id
 		if event.event_id in invited_to_ids:
 			invited_events.append(event)
@@ -28,11 +27,11 @@ def home(request):
 	# return HttpResponse(html)
 	template = loader.get_template('home.html')
 	context = {
-		'all_events' : all_events,
+		'all_events' : Event.objects.all(),
 		'hosted_events' : hosted_events,
 		'invited_events' : invited_events, 
 	}
-	return HttpResponse(template.render(context, request))
+	return HttpResponse(template.render(context))
 
 
 
