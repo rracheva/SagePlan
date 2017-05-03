@@ -26,12 +26,12 @@ def home(request):
 	# 	url = '/events/' + str(event.event_id) + '/'
 	# 	html += '<a href="' + url + '">' + event.title + '</a><br>'
 	# return HttpResponse(html)
-	template = loader.get_template('home.html')
-	context = {
-		'all_events' : Event.objects.all(),
-		'hosted_events' : hosted_events,
-		'invited_events' : invited_events, 
-	}
+    	template = loader.get_template('home.html')
+    	context = {
+    		'all_events' : Event.objects.all(),
+    		'hosted_events' : hosted_events,
+    		'invited_events' : invited_events, 
+    	}
 	return HttpResponse(template.render(context))
 
 
