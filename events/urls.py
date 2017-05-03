@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.conf.urls import url
 from django.contrib import admin
 from . import views
+from .models import Event, Invite
 
 urlpatterns = [
 	# admin
@@ -33,5 +34,8 @@ urlpatterns = [
 
 	#Search
 	url(r'^search/$', views.search, name='search'),
+
+	#Update
+	url(r'^update/(?P<pk>\d+)/$', views.EventUpdate.as_view(model=Event, success_url='/'), name='update'),
 
 ]

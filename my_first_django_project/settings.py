@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     #'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
    
 ]
 
@@ -85,6 +86,9 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
 
 WSGI_APPLICATION = 'my_first_django_project.wsgi.application'
 

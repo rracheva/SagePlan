@@ -16,7 +16,7 @@
     <div>
     <ul class="nav navbar-nav">
       {% if user.is_authenticated %}
-      <li class="active"><a href="/home">Home</a></li>
+      <li class="active"><a href="/">Home</a></li>
       <li><a href="/events">Create Event</a></li>
       <li><a href="/events/invite_view">Invite</a></li>
         <form class="navbar-form navbar-left" action="/events/search/" method="post">
@@ -53,10 +53,13 @@
 		<h1 class="text-center">{{event.title}}</h1>
 		<br>
 		<div class="well">
-			<h4>{{event.location}}</h4>
+			<h4>Location: {{event.location}}</h4>
 			<h4>{{event.start_time}} until {{event.end_time}}</h4>
 			<br>
-			<h4>{{event.description}}</h4>
+			<h4>Description: {{event.description}}</h4>
 		</div>
+    {% if hostT %}
+      <a href="/events/update/{{event.event_id}}/" class="btn">Edit Event</a>
+    {% endif %}
 	</div>
 <body>

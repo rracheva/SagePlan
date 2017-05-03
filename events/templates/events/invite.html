@@ -68,6 +68,13 @@
 				<input type="submit" class="btn btn-default" id="invite_button" name="invite_button" value="Invite"/>
 			</form>
 	</div>
+  {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+  {% endif %}
 <body>
 
 

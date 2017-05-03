@@ -6,6 +6,9 @@ from django.http import HttpResponse
 from .models import Event, Invite
 from django.contrib.auth.models import User
 from django.template import loader
+from django.contrib import messages
+from django.views.generic.edit import UpdateView
+
 
 # Create your views here.
 
@@ -22,6 +25,11 @@ def index(request):
 		'all_events' : all_events,
 	}
 	return HttpResponse(template.render(context, request))
+
+class EventUpdate(UpdateView):
+    model = Event
+    fields = ['title', 'start_time', 'end_time', 'privacy', 'description', 'location']
+    template_name_suffix = '_update_form'
 
 def signup(request):
 	#return HttpResponse("<h1>Index Page</h1>")
@@ -53,12 +61,19 @@ def invite_view(request):
 
 def detail(request, event_id):
 	event = Event.objects.get(event_id=event_id)
+	hostT = False
+	if event.creator==request.user:
+		hostT = True
+	
 	print event.title
 	template = loader.get_template('events/event_detail.html')
 	context = {
 		'event' : event,
+		'hostT' : hostT,
 	}
 	return HttpResponse(template.render(context, request))
+
+	
 
 def add_event(request):
 	event_to_add = Event()
@@ -93,12 +108,17 @@ def invite(request):
 	invitee_form = request.POST.get('invitee')
 	invitee = all_users.filter(username=invitee_form)
 	event = Event.objects.filter(event_id=request.POST.get('event_inv'))
-	invite_to_add.invitee = invitee[0]
-	invite_to_add.inviter = inviter
-	invite_to_add.event = event[0]
-	invite_to_add.accepted = False
-	invite_to_add.save()
-	return redirect('/')
+	if invitee :
+	    invite_to_add.invitee = invitee[0]
+	    invite_to_add.inviter = inviter
+	    invite_to_add.event = event[0]
+	    invite_to_add.accepted = False
+	    invite_to_add.save()
+	    return redirect('/')
+	else: 
+		messages.add_message(request, messages.ERROR, 'Please enter a valid username.')
+		return redirect('/events/invite_view')
+	
 
 def search(request):
 	search = request.POST.get('search')
