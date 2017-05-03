@@ -1,0 +1,97 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">SagePlan</a>
+      </div>
+    <div>
+    <ul class="nav navbar-nav">
+      {% if user.is_authenticated %}
+      <li class="active"><a href="/home">Home</a></li>
+      <li><a href="/events">Create Event</a></li>
+      <li><a href="/events/invite_view">Invite</a></li>
+        <form class="navbar-form navbar-left" action="/events/search/" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" name="search" value=""></input>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-primary"></input>
+          </div>
+        </form>
+        {% endif %}
+      </ul>
+      {% if user.is_authenticated %}
+      <ul class="nav navbar-nav navbar-right">
+        <li><h4>Hi {{ user.username }}!</h4></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+      {% else %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/events/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href={% url 'login' %}><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      {% endif %}
+      </li>
+    </ul>
+    </div>
+    </div>
+  </nav>
+
+
+<!-- 		<div class="container">
+          <h4>Invited Events</h4>
+          <div class="well well-sm">
+            <ul>
+              {% for event in invited_events %}
+                <li><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div> -->
+
+	<div>
+		{% csrf_token %}
+		<div class="container">
+		<h4>Hosted Events</h4>
+		<div class="well well-sm">	
+			<ul>
+			{% for event in hosted_events %}
+				<li value="{{event.event_id}}"><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+			{% endfor %}
+			</ul>
+			</div>
+		</div>
+
+		<div class="container">
+          <h4>Invited Events</h4>
+          <div class="well well-sm">
+			<ul> 	
+			{% for event in invited_events %}
+				<li value="{{event.event_id}}"><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+			{% endfor %}
+			</ul>
+			</div>
+		</div>
+
+		<div class="container">
+          <h4>Public Events</h4>
+          <div class="well well-sm"> 	
+			<ul>
+			{% for event in public_events %}
+				<li value="{{event.event_id}}"><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+			{% endfor %}
+			</ul>
+			</div>
+		</div>
+	</div>
+</body>
