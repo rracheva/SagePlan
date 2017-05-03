@@ -5,8 +5,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-
 <body>
+
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -48,15 +48,50 @@
   </nav>
 
 
+<!-- 		<div class="container">
+          <h4>Invited Events</h4>
+          <div class="well well-sm">
+            <ul>
+              {% for event in invited_events %}
+                <li><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div> -->
 
-	<div class="container">
-		<h1 class="text-center">{{event.title}}</h1>
-		<br>
-		<div class="well">
-			<h4>{{event.location}}</h4>
-			<h4>{{event.start_time}} until {{event.end_time}}</h4>
-			<br>
-			<h4>{{event.description}}</h4>
+	<div>
+		{% csrf_token %}
+		<div class="container">
+		<h4>Hosted Events</h4>
+		<div class="well well-sm">	
+			<ul>
+			{% for event in hosted_events %}
+				<li value="{{event.event_id}}"><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+			{% endfor %}
+			</ul>
+			</div>
+		</div>
+
+		<div class="container">
+          <h4>Invited Events</h4>
+          <div class="well well-sm">
+			<ul> 	
+			{% for event in invited_events %}
+				<li value="{{event.event_id}}"><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+			{% endfor %}
+			</ul>
+			</div>
+		</div>
+
+		<div class="container">
+          <h4>Public Events</h4>
+          <div class="well well-sm"> 	
+			<ul>
+			{% for event in public_events %}
+				<li value="{{event.event_id}}"><a href="/events/{{event.event_id}}">{{event.title}}</a></li>
+			{% endfor %}
+			</ul>
+			</div>
 		</div>
 	</div>
-<body>
+</body>
