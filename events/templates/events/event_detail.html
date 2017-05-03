@@ -53,10 +53,12 @@
 		<h1 class="text-center">{{event.title}}</h1>
 		<br>
 		<div class="well">
-			<h4>Location: {{event.location}}</h4>
-			<h4>{{event.start_time}} until {{event.end_time}}</h4>
-			<br>
-			<h4>Description: {{event.description}}</h4>
+			<h4>Where: {{event.location}}</h4>
+			<h4>When: {{event.start_time}} until {{event.end_time}}</h4>
+			
+			<h4>What: {{event.description}}</h4>
+      <br>
+      <h5>Host: {{event.creator}}</h5>
 		</div>
     {% if hostT %}
       <a href="/events/update/{{event.event_id}}/" class="btn">Edit Event</a>
