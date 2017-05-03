@@ -16,9 +16,9 @@ def home(request):
 	   invited_to_ids = invited_to.values_list('event_id', flat=True)
 	   invited_events = []
 	   for event in Event.objects.all():
-		  print event.event_id
-		  if event.event_id in invited_to_ids:
-			 invited_events.append(event)
+		    print event.event_id
+		    if event.event_id in invited_to_ids:
+			   invited_events.append(event)
 
 
 	# html = ''
