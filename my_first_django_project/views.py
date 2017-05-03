@@ -25,7 +25,7 @@ def home(request):
             'hosted_events' : hosted_events,
             'invited_events' : invited_events, 
         }
-        return HttpResponse(template.render(context))
+        return HttpResponse(template.render(context, request))
     else:
         return redirect('/login/')
 
