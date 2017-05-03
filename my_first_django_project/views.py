@@ -19,20 +19,15 @@ def home(request):
             print event.event_id
             if event.event_id in invited_to_ids:
                invited_events.append(event)
-
-
-    # html = ''
-    # for event in all_events:
-    #   url = '/events/' + str(event.event_id) + '/'
-    #   html += '<a href="' + url + '">' + event.title + '</a><br>'
-    # return HttpResponse(html)
-    template = loader.get_template('home.html')
-    context = {
-        'all_events' : Event.objects.all(),
-        'hosted_events' : hosted_events,
-        'invited_events' : invited_events, 
-    }
-    return HttpResponse(template.render(context))
+        template = loader.get_template('home.html')
+        context = {
+            'all_events' : Event.objects.all(),
+            'hosted_events' : hosted_events,
+            'invited_events' : invited_events, 
+        }
+        return HttpResponse(template.render(context))
+    else:
+        return redirect('/login/')
 
 
 
