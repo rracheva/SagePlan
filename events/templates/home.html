@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+        <body>
+
+            <div class="jumbotron text-center">
+            <h1>Welcome to SagePlan!</h1>
+            </div>
+            {% block content %}
+      			<a type="button" class="btn btn-primary" href="/events/signup">Add User</a>
+
+      			<b type="button" class="btn btn-primary" href="/events/invite_view">Invite</b>
+
+      			<!-- <ul>
+					{% for event in all_events %}
+						<li><a href="/events/{{event.event_id}}/">{{event.title}}</a></li>
+					{% endfor %}
+				</ul> -->
+    		{% endblock %}
+        </body>
+</html>

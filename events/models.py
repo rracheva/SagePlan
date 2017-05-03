@@ -22,7 +22,7 @@ from django.db import models
 # Create your models here.
 
 class Event(models.Model):
-	creator = models.ForeignKey(User, unique=True, related_name="event_creator")
+	creator = models.ForeignKey(User, related_name="event_creator")
 	event_id = models.AutoField(primary_key=True, unique=True)
 	title = models.CharField(max_length = 500)
 	start_time = models.DateTimeField()
@@ -44,7 +44,7 @@ class Task(models.Model):
 
 class Invite(models.Model):
 	inviter = models.ForeignKey(User, related_name="inviter")
-	invitee = models.ForeignKey(User, related_name="invitee")
+	invitee = models.ForeignKey(User, related_name="invitee", related_query_name="invitee")
 	event = models.ForeignKey(Event, related_name="event_inv")
 	accepted = models.BooleanField()
 
