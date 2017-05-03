@@ -10,14 +10,15 @@ from django.template import loader
 
 def home(request):
 	#return HttpResponse("<h1>Index Page</h1>")
-	hosted_events = Event.objects.filter(creator=request.user)
-	invited_to = Invite.objects.filter(invitee=request.user)
-	invited_to_ids = invited_to.values_list('event_id', flat=True)
-	invited_events = []
-	for event in Event.objects.all():
-		print event.event_id
-		if event.event_id in invited_to_ids:
-			invited_events.append(event)
+    if request.user.is_authenticated
+	   hosted_events = Event.objects.filter(creator=request.user)
+	   invited_to = Invite.objects.filter(invitee=request.user)
+	   invited_to_ids = invited_to.values_list('event_id', flat=True)
+	   invited_events = []
+	   for event in Event.objects.all():
+		  print event.event_id
+		  if event.event_id in invited_to_ids:
+			 invited_events.append(event)
 
 
 	# html = ''
